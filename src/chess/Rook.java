@@ -1,4 +1,4 @@
-package schach;
+package chess;
 
 import java.util.LinkedList;
 

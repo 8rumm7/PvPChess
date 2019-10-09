@@ -1,4 +1,4 @@
-package schach;
+package chess;
 
 public class Position {
     int spalte;
