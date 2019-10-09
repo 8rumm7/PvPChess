@@ -23,5 +23,7 @@
 hs_err_pid*
 
 #my changes
-
+.idea
 *.iml
+/out.*
+.kotlin_module
