@@ -6,6 +6,7 @@ public class Position {
     public Position(int spalte, int zeile) {
         this.spalte=spalte;
         this.zeile=zeile;
+        
     }
 
     public boolean equals(Position p){
