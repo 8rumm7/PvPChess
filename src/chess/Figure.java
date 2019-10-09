@@ -1,4 +1,6 @@
 package chess;
 
-public interface Figure {
+public abstract class Figure {
+    public Figure[][] board;
+    Position position;
 }

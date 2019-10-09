@@ -2,7 +2,7 @@ package chess;
 
 import java.util.LinkedList;
 
-class Queen implements Figure {
+class Queen extends Figure {
     private static final boolean WHITE = true;
     private static final boolean BLACK = false;
     Position position;
@@ -16,30 +16,58 @@ class Queen implements Figure {
     LinkedList<Position> possiblePositions() {
         LinkedList<Position> positions = new LinkedList<>();
         Position p;
-        for (int i = 0; i < 8; i++) {
+        for (int i = 1; i < 8; i++) {
             p = new Position(position.spalte + i, position.zeile + i);
             if (!position.equals(p) && p.spalte >= 0 && p.spalte <= 7 && p.zeile >= 0 && p.zeile <= 7) {
                 positions.add(p);
+                if (board[p.zeile][p.spalte] != null) {
+                    break;
+                }
             }
+        }
+        for (int i = 1; i < 8; i++) {
             p = new Position(position.spalte + i, position.zeile - i);
             if (!position.equals(p) && p.spalte >= 0 && p.spalte <= 7 && p.zeile >= 0 && p.zeile <= 7) {
                 positions.add(p);
+                if (board[p.zeile][p.spalte] != null) {
+                    break;
+                }
             }
+        }
+        for (int i = 1; i < 8; i++) {
             p = new Position(position.spalte - i, position.zeile + i);
             if (!position.equals(p) && p.spalte >= 0 && p.spalte <= 7 && p.zeile >= 0 && p.zeile <= 7) {
                 positions.add(p);
+                if (board[p.zeile][p.spalte] != null) {
+                    break;
+                }
             }
+        }
+        for (int i = 1; i < 8; i++) {
             p = new Position(position.spalte - i, position.zeile - i);
             if (!position.equals(p) && p.spalte >= 0 && p.spalte <= 7 && p.zeile >= 0 && p.zeile <= 7) {
                 positions.add(p);
+                if (board[p.zeile][p.spalte] != null) {
+                    break;
+                }
             }
+        }
+        for (int i = 1; i < 8; i++) {
             p = new Position(i, position.zeile);
             if (!position.equals(p) && p.spalte >= 0 && p.spalte <= 7 && p.zeile >= 0 && p.zeile <= 7) {
                 positions.add(p);
+                if (board[p.zeile][p.spalte] != null) {
+                    break;
+                }
             }
+        }
+        for (int i = 1; i < 8; i++) {
             p = new Position(position.spalte, i);
             if (!position.equals(p) && p.spalte >= 0 && p.spalte <= 7 && p.zeile >= 0 && p.zeile <= 7) {
                 positions.add(p);
+                if (board[p.zeile][p.spalte] != null) {
+                    break;
+                }
             }
 
         }

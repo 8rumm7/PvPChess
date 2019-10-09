@@ -2,7 +2,7 @@ package chess;
 
 import java.util.LinkedList;
 
-class King implements Figure {
+class King extends Figure {
     private static final boolean WHITE = true;
     private static final boolean BLACK = false;
     Position position;

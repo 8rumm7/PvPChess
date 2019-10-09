@@ -6,8 +6,9 @@ class Model {
     private LinkedList<Figure> figureList;
     private static final boolean WHITE = true;
     private static final boolean BLACK = false;
+    static Figure[][] board;
 
-    private void init() {
+    void init() {
         figureList.add(new King(new Position(4, 0), WHITE));
         figureList.add(new King(new Position(4, 7), BLACK));
         figureList.add(new Queen(new Position(3, 0), WHITE));
@@ -27,6 +28,13 @@ class Model {
         for (int i = 0; i < 8; i++) {
             figureList.add(new Pawn(new Position(i, 1), WHITE));
             figureList.add(new Pawn(new Position(i, 6), BLACK));
+        }
+        for(Figure f: figureList){
+            Position p = f.position;
+            board[p.zeile][p.spalte]=f;
+        }
+        for(Figure f :figureList){
+            f.board=board;
         }
     }
 }
