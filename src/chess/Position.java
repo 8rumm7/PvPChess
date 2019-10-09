@@ -1,12 +1,12 @@
 package chess;
 
 public class Position {
-    int spalte;
     int zeile;
-    public Position(int spalte, int zeile) {
-        this.spalte=spalte;
+    int spalte;
+    public Position( int zeile,int spalte) {
         this.zeile=zeile;
-        
+        this.spalte=spalte;
+
     }
 
     public boolean equals(Position p){
