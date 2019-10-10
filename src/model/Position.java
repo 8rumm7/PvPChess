@@ -1,4 +1,4 @@
-package chess;
+package model;
 
 public class Position {
     int zeile;

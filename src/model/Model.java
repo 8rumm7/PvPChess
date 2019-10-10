@@ -1,14 +1,14 @@
-package chess;
+package model;
 
 import java.util.LinkedList;
 
-class Model {
+public class Model {
     private LinkedList<Figure> figureList;
     private static final boolean WHITE = true;
     private static final boolean BLACK = false;
     static Figure[][] board;
 
-    void init() {
+    public void init() {
         figureList.add(new King(new Position(4, 0), WHITE));
         figureList.add(new King(new Position(4, 7), BLACK));
         figureList.add(new Queen(new Position(3, 0), WHITE));

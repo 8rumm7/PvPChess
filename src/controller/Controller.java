@@ -1,4 +1,7 @@
-package chess;
+package controller;
+
+import model.Model;
+import view.View;
 
 public class Controller {
     static Model model;

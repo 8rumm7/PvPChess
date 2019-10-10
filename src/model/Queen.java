@@ -1,4 +1,4 @@
-package chess;
+package model;
 
 import java.util.LinkedList;
 
