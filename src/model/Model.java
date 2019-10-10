@@ -4,6 +4,8 @@ import java.util.LinkedList;
 
 public class Model {
     private LinkedList<Figure> figureList;
+    LinkedList<Figure> blackDeadList;
+    LinkedList<Figure> whiteDeadList;
     static Figure[][] board;
     private static final String KING = "KING";
     private static final String QUEEN = "QUEEN";
@@ -14,8 +16,11 @@ public class Model {
     private static final String BLACK = "BLACK";
     private static final String WHITE = "WHITE";
 
+
     public void init() {
         figureList = new LinkedList<>();
+        whiteDeadList = new LinkedList<>();
+        blackDeadList = new LinkedList<>();
         board = new Figure[8][8];
         figureList.add(new Figure(KING, WHITE, new Position(0, 4)));
         figureList.add(new Figure(KING, BLACK, new Position(7, 4)));
@@ -268,5 +273,13 @@ public class Model {
         }
         return positions;
 
+    }
+    void removeFigure(Figure figure){
+        figureList.remove(figure);
+        if(figure.color.equals(WHITE)){
+            whiteDeadList.add(figure);
+        }else{
+            blackDeadList.add(figure);
+        }
     }
 }
