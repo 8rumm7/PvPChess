@@ -3,9 +3,9 @@ package model;
 import java.util.LinkedList;
 
 public class Model {
-    private LinkedList<Figure> figureList;
-    LinkedList<Figure> blackDeadList;
-    LinkedList<Figure> whiteDeadList;
+    public LinkedList<Figure> figureList;
+    public LinkedList<Figure> blackDeadList;
+    public LinkedList<Figure> whiteDeadList;
     static Figure[][] board;
     private static final String KING = "KING";
     private static final String QUEEN = "QUEEN";
@@ -44,7 +44,6 @@ public class Model {
         }
         for (Figure f : figureList) {
             Position p = f.position;
-            System.out.println(f);
             board[p.zeile][p.spalte] = f;
         }
         for (Figure f : figureList) {
@@ -242,43 +241,44 @@ public class Model {
                 positions.add(newPosition);
             }
         }
-        if(figure.kind.equals(PAWN)){
-            if(figure.color.equals(WHITE)){
-                if(position.zeile==1&&board[3][position.spalte] == null){
-                    positions.add(new Position(position.zeile+2,position.spalte));
+        if (figure.kind.equals(PAWN)) {
+            if (figure.color.equals(WHITE)) {
+                if (position.zeile == 1 && board[3][position.spalte] == null) {
+                    positions.add(new Position(position.zeile + 2, position.spalte));
                 }
-                if(board[position.zeile+1][position.spalte] == null){
-                    positions.add(new Position(position.zeile+1,position.spalte));
+                if (board[position.zeile + 1][position.spalte] == null) {
+                    positions.add(new Position(position.zeile + 1, position.spalte));
                 }
-                if(board[position.zeile+1][position.spalte-1] != null){
-                    positions.add(new Position(position.zeile+1,position.spalte-1));
+                if (board[position.zeile + 1][position.spalte - 1] != null) {
+                    positions.add(new Position(position.zeile + 1, position.spalte - 1));
                 }
-                if(board[position.zeile+1][position.spalte+1] != null){
-                    positions.add(new Position(position.zeile+1,position.spalte+1));
+                if (board[position.zeile + 1][position.spalte + 1] != null) {
+                    positions.add(new Position(position.zeile + 1, position.spalte + 1));
                 }
-            }else{
-                if(position.zeile==6&&board[4][position.spalte] == null){
-                    positions.add(new Position(position.zeile-2,position.spalte));
+            } else {
+                if (position.zeile == 6 && board[4][position.spalte] == null) {
+                    positions.add(new Position(position.zeile - 2, position.spalte));
                 }
-                if(board[position.zeile-1][position.spalte] == null){
-                    positions.add(new Position(position.zeile-1,position.spalte));
+                if (board[position.zeile - 1][position.spalte] == null) {
+                    positions.add(new Position(position.zeile - 1, position.spalte));
                 }
-                if(board[position.zeile-1][position.spalte-1] == null){
-                    positions.add(new Position(position.zeile-1,position.spalte-1));
+                if (board[position.zeile - 1][position.spalte - 1] == null) {
+                    positions.add(new Position(position.zeile - 1, position.spalte - 1));
                 }
-                if(board[position.zeile-1][position.spalte+1] == null){
-                    positions.add(new Position(position.zeile-1,position.spalte+1));
+                if (board[position.zeile - 1][position.spalte + 1] == null) {
+                    positions.add(new Position(position.zeile - 1, position.spalte + 1));
                 }
             }
         }
         return positions;
 
     }
-    void removeFigure(Figure figure){
+
+    void removeFigure(Figure figure) {
         figureList.remove(figure);
-        if(figure.color.equals(WHITE)){
+        if (figure.color.equals(WHITE)) {
             whiteDeadList.add(figure);
-        }else{
+        } else {
             blackDeadList.add(figure);
         }
     }
