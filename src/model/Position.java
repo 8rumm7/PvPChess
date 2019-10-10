@@ -12,4 +12,9 @@ public class Position {
     public boolean equals(Position p){
         return this.spalte==p.spalte&&this.zeile==p.zeile;
     }
+
+    @Override
+    public String toString() {
+        return this.zeile+" "+this.spalte;
+    }
 }
