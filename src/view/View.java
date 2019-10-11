@@ -38,6 +38,7 @@ public class View  {
         button = new JButton("Options");
         button.setBackground(Color.GRAY);
         button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        button.setForeground(Color.WHITE);
         c.insets=new Insets(EXTERNAL_PADDING,EXTERNAL_PADDING,EXTERNAL_PADDING,EXTERNAL_PADDING);
         c.weightx=0.1;
         c.weighty=0.1;
@@ -85,6 +86,7 @@ public class View  {
         JButton giveUp = new JButton("Give Up");
         giveUp.setBackground(Color.GRAY);
         giveUp.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        giveUp.setForeground(Color.WHITE);
         c.gridx=12;
         c.gridy=9;
         pane.add(giveUp,c);
