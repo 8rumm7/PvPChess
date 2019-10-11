@@ -13,6 +13,7 @@ public class View {
     Chat chat;
     private static final Color BACKGROUND_COLOR = Color.LIGHT_GRAY;
     private static final int EXTERNAL_PADDING = 5;
+    String name="John Doe";
 
 
     public View(Model model) {
@@ -23,7 +24,11 @@ public class View {
     private void initComponents() {
         this.chessBoard = new ChessBoard(model.figureList);
         this.figureBox = new FigureBox(model.whiteDeadList);
-        this.chat = new Chat(BACKGROUND_COLOR);
+        name = JOptionPane.showInputDialog("Whats your opponents name?");
+        if ( name.equals("")) {
+            this.name = "John Doe";
+        }
+        this.chat = new Chat(BACKGROUND_COLOR,name);
         initFrame(chessBoard, figureBox, chat);
     }
 
@@ -46,67 +51,68 @@ public class View {
         c.gridy = 0;
         c.fill = GridBagConstraints.BOTH;
         c.insets = new Insets(EXTERNAL_PADDING, EXTERNAL_PADDING, EXTERNAL_PADDING, EXTERNAL_PADDING);
-        //button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pane.add(button, c);
 
         JLabel connectedTo = new JLabel("Connected to:");
-        c.weightx = 0.2;
+        c.weightx = 0.1;
         c.weighty = 0.1;
         c.gridx = 10;
         c.gridy = 0;
         c.gridheight = 1;
         c.gridwidth = 2;
-        // connectedTo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pane.add(connectedTo, c);
+
+        JLabel name = new JLabel("Name: "+this.name);
+        c.weightx = 0.1;
+        c.weighty = 0.1;
+        c.gridx = 10;
+        c.gridy = 1;
+        c.gridheight = 1;
+        c.gridwidth = 2;
+        pane.add(name, c);
 
         c.weightx = 0.8;
         c.weighty = 0.8;
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 2;
         c.gridheight = 8;
         c.gridwidth = 8;
-        //chessBoard.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pane.add(chessBoard, c);
 
         c.weightx = 0.2;
         c.weighty = 0.8;
         c.gridx = 8;
-        c.gridy = 1;
+        c.gridy = 2;
         c.gridheight = 8;
         c.gridwidth = 2;
-        //chessBoxWhite.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pane.add(chessBoxWhite, c);
 
         c.weightx = 0.2;
         c.weighty = 0.8;
         c.gridx = 10;
-        c.gridy = 1;
+        c.gridy = 2;
         c.gridheight = 8;
         c.gridwidth = 2;
-        //chat.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pane.add(chat, c);
 
         JLabel time = new JLabel("Time");
         c.weightx = 0.1;
         c.weighty = 0.1;
         c.gridx = 0;
-        c.gridy = 9;
+        c.gridy = 10;
         c.gridheight = 1;
         c.gridwidth = 1;
-        //time.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pane.add(time, c);
 
         JButton giveUp = new JButton("Give Up");
         giveUp.setBackground(Color.GRAY);
-        //giveUp.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         giveUp.setForeground(Color.WHITE);
         c.weightx = 0.1;
         c.weighty = 0.1;
         c.gridx = 10;
-        c.gridy = 9;
+        c.gridy = 10;
         c.gridheight = 1;
         c.gridwidth = 1;
-        //giveUp.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         pane.add(giveUp, c);
 
         pane.setBackground(BACKGROUND_COLOR);
