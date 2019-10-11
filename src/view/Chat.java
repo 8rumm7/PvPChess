@@ -18,24 +18,18 @@ public class Chat extends JPanel {
     }
 
     private void init() {
-        this.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+        this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
 
         String name = JOptionPane.showInputDialog("Whats your opponents name?");
         if (name == null || name.equals("")) {
             name = "John Doe";
         }
         JLabel nameLabel = new JLabel("Name: " + name);
-        c.gridx = 0;
-        c.gridy = 0;
-        c.weightx = 0;
-        c.weighty = 0;
-        this.add(nameLabel, c);
+        this.add(nameLabel);
 
 
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         for (int i = 0; i < 5; i++) {
             label = new JLabel();
             label.setText(name+": dumb test message");
@@ -45,27 +39,21 @@ public class Chat extends JPanel {
             label.setVisible(true);
             panel.add(label);
         }
+        panel.setMaximumSize(new Dimension(1000,1000));
+        panel.setBackground(MESSENGER_BACKGROUND_COLOR);
+        panel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         scrollPaneMessenger = new JScrollPane(panel);
-        scrollPaneMessenger.setOpaque(true);
-        c.weightx = 1;
-        c.weighty = 1;
-        c.gridx = 0;
-        c.gridy = 1;
-        c.gridheight = 6;
-        c.fill=GridBagConstraints.BOTH;
+        scrollPaneMessenger.setMaximumSize(new Dimension(Integer.MAX_VALUE,1000));
+
         scrollPaneMessenger.setBackground(MESSENGER_BACKGROUND_COLOR);
-        scrollPaneMessenger.setBorder(null);
+        scrollPaneMessenger.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         scrollPaneMessenger.setVisible(true);
-        this.add(scrollPaneMessenger, c);
+        this.add(scrollPaneMessenger);
 
         JTextField input= new JTextField();
-        c.gridx = 0;
-        c.gridy = 8;
-        c.weightx=0;
-        c.weighty=0;
-        c.fill=GridBagConstraints.HORIZONTAL;
-        input.setBorder(null);
-        this.add(input,c);
+        input.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        input.setMaximumSize(new Dimension(Integer.MAX_VALUE,20));
+        this.add(input);
         this.setBackground(BACKGROUND_COLOR);
         this.setBorder(null);
         this.setVisible(true);
