@@ -11,9 +11,10 @@ public class View {
     ChessBoard chessBoard;
     FigureBox figureBox;
     Chat chat;
+    private static final Color BUTTON_BACKGROUND_COLOR=Color.GRAY;
     private static final Color BACKGROUND_COLOR = Color.LIGHT_GRAY;
     private static final int EXTERNAL_PADDING = 5;
-    String name="John Doe";
+    String name = "John Doe";
 
 
     public View(Model model) {
@@ -22,17 +23,17 @@ public class View {
     }
 
     private void initComponents() {
-        this.chessBoard = new ChessBoard(model.figureList);
-        this.figureBox = new FigureBox(model.whiteDeadList);
+        this.chessBoard = new ChessBoard(model.figureList,BACKGROUND_COLOR);
+        this.figureBox = new FigureBox(model.whiteDeadList,BACKGROUND_COLOR);
         name = JOptionPane.showInputDialog("Whats your opponents name?");
-        if ( name.equals("")) {
+        if (name.equals("")) {
             this.name = "John Doe";
         }
-        this.chat = new Chat(BACKGROUND_COLOR,name);
-        initFrame(chessBoard, figureBox, chat);
+        this.chat = new Chat(BACKGROUND_COLOR, name);
+        initFrame(chat);
     }
 
-    private void initFrame(ChessBoard chessBoard, FigureBox chessBoxWhite, Chat chat) {
+    private void initFrame(Chat chat) {
         JFrame frame = new JFrame();
         frame.setSize(1000, 1000);
         GridBagConstraints c = new GridBagConstraints();
@@ -41,8 +42,7 @@ public class View {
         pane.setLayout(new GridBagLayout());
 
         button = new JButton("Options");
-        button.setBackground(Color.GRAY);
-        button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        button.setBackground(BUTTON_BACKGROUND_COLOR);
         button.setForeground(Color.WHITE);
 
         c.weightx = 0.1;
@@ -62,7 +62,7 @@ public class View {
         c.gridwidth = 2;
         pane.add(connectedTo, c);
 
-        JLabel name = new JLabel("Name: "+this.name);
+        JLabel name = new JLabel("Name: " + this.name);
         c.weightx = 0.1;
         c.weighty = 0.1;
         c.gridx = 10;
@@ -77,6 +77,7 @@ public class View {
         c.gridy = 2;
         c.gridheight = 8;
         c.gridwidth = 8;
+        chessBoard.setBorder(null);
         pane.add(chessBoard, c);
 
         c.weightx = 0.2;
@@ -85,7 +86,8 @@ public class View {
         c.gridy = 2;
         c.gridheight = 8;
         c.gridwidth = 2;
-        pane.add(chessBoxWhite, c);
+        figureBox.setBorder(null);
+        pane.add(figureBox, c);
 
         c.weightx = 0.2;
         c.weighty = 0.8;
@@ -105,7 +107,7 @@ public class View {
         pane.add(time, c);
 
         JButton giveUp = new JButton("Give Up");
-        giveUp.setBackground(Color.GRAY);
+        giveUp.setBackground(BUTTON_BACKGROUND_COLOR);
         giveUp.setForeground(Color.WHITE);
         c.weightx = 0.1;
         c.weighty = 0.1;

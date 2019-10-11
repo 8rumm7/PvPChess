@@ -10,16 +10,19 @@ import java.util.LinkedList;
 
 public class ChessBoard extends JPanel {
     LinkedList<Figure> figureList;
+    private Color BACKGROUND_COLOR;
     private static final Color LIGHT = new Color(237, 194, 130);
     private static final Color DARK = new Color(140, 110, 65);
 
-    public ChessBoard(LinkedList<Figure> figureList) {
+    public ChessBoard(LinkedList<Figure> figureList, Color backgroundColor) {
         this.figureList = figureList;
+        this.BACKGROUND_COLOR=backgroundColor;
         init();
     }
 
     private void init() {
         this.setLayout(new GridLayout(8, 8));
+        this.setBackground(BACKGROUND_COLOR);
         JPanel rect;
         for (int i = 0; i < 8; i++) {
             for (int n = 0; n < 8; n++) {
@@ -33,7 +36,6 @@ public class ChessBoard extends JPanel {
 
             }
         }
-        this.setSize(100, 100);
 
     }
 }

@@ -45,7 +45,7 @@ public class Chat extends JPanel {
         this.add(scrollPaneMessenger);
 
         JTextField input = new JTextField();
-        input.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        input.setBorder(null);
         input.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
         this.add(input);
         this.setBackground(BACKGROUND_COLOR);

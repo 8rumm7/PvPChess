@@ -7,25 +7,26 @@ import java.awt.*;
 import java.util.LinkedList;
 
 public class FigureBox extends JPanel {
-    LinkedList<Figure> whiteDeadList;
-    private static final Color TRANSLUCENT=new Color(0,0,0,0);
+    LinkedList<Figure> deadList;
+    private Color BACKGROUND_COLOR;
     private static final Color BOX_COLOR=new Color(132, 104, 78);
     JPanel panel;
 
 
-    public FigureBox(LinkedList<Figure> whiteDeadList) {
-        this.whiteDeadList = whiteDeadList;
+    public FigureBox(LinkedList<Figure> deadList, Color backgroundColor) {
+        this.deadList = deadList;
+        this.BACKGROUND_COLOR=backgroundColor;
         init();
     }
 
     private void init() {
-        this.setBackground(BOX_COLOR);
+        this.setBackground(BACKGROUND_COLOR);
         this.setLayout(new GridLayout(8,2));
         JPanel figureField;
         for(int i=0;i<16;i++){
             figureField=new JPanel();
             figureField.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-            figureField.setBackground(TRANSLUCENT);
+            figureField.setBackground(BOX_COLOR);
             this.add(figureField);
         }
         this.setVisible(true);
