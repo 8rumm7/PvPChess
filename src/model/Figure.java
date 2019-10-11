@@ -31,6 +31,7 @@ public abstract class Figure {
         return position;
     }
 
+
     public abstract List<Position> getPossiblePositions();
 
     public void setPosition(Position newP){
@@ -39,7 +40,7 @@ public abstract class Figure {
 
     @Override
     public String toString(){
-        return this.getType()+"@"+this.getPosition().zeile+"/"+this.getPosition().spalte;
+        return this.getColor()+" "+this.getType()+"@"+this.getPosition().zeile+"/"+this.getPosition().spalte;
     }
 
     public abstract String getType();
@@ -51,6 +52,6 @@ public abstract class Figure {
             return false;
         }
         Figure other = (Figure)obj;
-        return this.getColor().equals(other.getColor());
+        return this.getColor().equals(other.getColor()) && this.getPosition().equals(other.getPosition());
     }
 }

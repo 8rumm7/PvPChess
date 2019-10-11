@@ -27,6 +27,8 @@ public class Rook extends Figure {
                 if(!m.isFree(this.getColor(), p)) break;
 
                 ret.add(p);
+                if(m.getFigureAt(p) != null) break;
+
             }
         }
 
@@ -36,23 +38,29 @@ public class Rook extends Figure {
                 if(!m.isFree(this.getColor(), p)) break;
 
                 ret.add(p);
+                if(m.getFigureAt(p) != null) break;
+
             }
         }
 
         for(int i = 1; i <maxedNum; i++){
-            if(Position.isValid(this.getPosition().zeile+1, this.getPosition().spalte)){
-                p = new Position(this.getPosition().zeile+1, this.getPosition().spalte);
+            if(Position.isValid(this.getPosition().zeile+i, this.getPosition().spalte)){
+                p = new Position(this.getPosition().zeile+i, this.getPosition().spalte);
                 if(!m.isFree(this.getColor(), p)) break;
 
                 ret.add(p);
+                if(m.getFigureAt(p) != null) break;
+
             }
         }
         for(int i = 1; i <maxedNum; i++){
-            if(Position.isValid(this.getPosition().zeile+1, this.getPosition().spalte)){
-                p = new Position(this.getPosition().zeile+1, this.getPosition().spalte);
+            if(Position.isValid(this.getPosition().zeile-i, this.getPosition().spalte)){
+                p = new Position(this.getPosition().zeile-i, this.getPosition().spalte);
                 if(!m.isFree(this.getColor(), p)) break;
 
                 ret.add(p);
+                if(m.getFigureAt(p) != null) break;
+
             }
         }
         return ret;
