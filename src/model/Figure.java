@@ -1,7 +1,7 @@
 package model;
 
 
-public  class Figure {
+public abstract class Figure {
     String kind;
     String color;
     Position position;
