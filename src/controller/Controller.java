@@ -8,7 +8,7 @@ public class Controller {
     View view;
 
     public Controller(Model model, View view) {
-        this.model = model;
+        Controller.model = model;
         this.view = view;
     }
 
