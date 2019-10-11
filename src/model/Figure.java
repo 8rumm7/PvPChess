@@ -2,9 +2,9 @@ package model;
 
 
 public  class Figure {
-    String kind;
-    String color;
-    Position position;
+    public String kind;
+    public String color;
+    public Position position;
     Figure[][] board;
 
     Figure(String kind, String color, Position position){

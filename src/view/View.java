@@ -4,6 +4,7 @@ import model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class View {
 
@@ -17,13 +18,18 @@ public class View {
     String name = "John Doe";
 
 
-    public View(Model model) {
+    public View(Model model)  {
         this.model = model;
         initComponents();
     }
 
-    private void initComponents() {
-        this.chessBoard = new ChessBoard(model.figureList,BACKGROUND_COLOR);
+
+    private void initComponents()  {
+        try {
+            this.chessBoard = new ChessBoard(model.figureList,BACKGROUND_COLOR);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.figureBox = new FigureBox(model.whiteDeadList,BACKGROUND_COLOR);
         name = JOptionPane.showInputDialog("Whats your opponents name?");
         if (name.equals("")) {
