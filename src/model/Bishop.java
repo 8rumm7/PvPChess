@@ -31,6 +31,8 @@ public class Bishop extends Figure{
                     break;
                 }
                 if(!ret.contains(p)) ret.add(p);
+                if(m.getFigureAt(p) != null) break;
+
             }
         }
 
@@ -41,6 +43,8 @@ public class Bishop extends Figure{
                     break;
                 }
                 if(!ret.contains(p)) ret.add(p);
+                if(m.getFigureAt(p) != null) break;
+
             }
         }
 
@@ -51,6 +55,8 @@ public class Bishop extends Figure{
                     break;
                 }
                 if(!ret.contains(p)) ret.add(p);
+                if(m.getFigureAt(p) != null) break;
+
             }
         }
 
@@ -61,6 +67,8 @@ public class Bishop extends Figure{
                     break;
                 }
                 if(!ret.contains(p)) ret.add(p);
+                if(m.getFigureAt(p) != null) break;
+
 
             }
         }

@@ -35,7 +35,8 @@ public class Model {
             figureList.add(new Pawn(this,PLAYERCOLOR.BLACK, new Position(6, i)));
         }
 
-        figureList.forEach(f -> board[f.getPosition().zeile][f.getPosition().spalte] = f);
+
+        figureList.forEach(f -> put(f));
 
         for (Figure f : figureList) {
             System.out.println(f);
@@ -53,6 +54,36 @@ public class Model {
 
     public Figure getFigureAt(int zeile, int spalte){
         return board[zeile][spalte];
+    }
+
+    public boolean put(Figure f){
+        System.out.println(board[f.getPosition().zeile][f.getPosition().spalte]);
+
+            try{
+                if(board[f.getPosition().zeile][f.getPosition().spalte]!= null){
+                    int i = figureList.indexOf(f);
+                    figureList.remove(i);
+                    throw new Exception("Tried putting a figure on a settled position");
+                }
+                board[f.getPosition().zeile][f.getPosition().spalte] = f;
+
+                return true;
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+            return false;
+    }
+
+    public boolean strike(Figure f){
+        //TODO
+        return true;
+    }
+
+    public Figure getFigureAt(Position p){
+        return board[p.zeile][p.spalte];
     }
 
 
