@@ -88,14 +88,12 @@ public class Model {
 
 
 
-    }
+
 
     void removeFigure(Figure figure) {
         figureList.remove(figure);
-        if (figure.color.equals(WHITE)) {
-            whiteDeadList.add(figure);
-        } else {
-            blackDeadList.add(figure);
-        }
+        deadFigures.add(figure);
     }
+
+
 }
