@@ -31,12 +31,27 @@ public class Pawn extends Figure {
         List<Position> ret = new LinkedList<Position>();
         Position p;
         int i=-1;
+        int start = 6;
         if(this.getColor() == PLAYERCOLOR.WHITE){
             i=1;
+            start = 1;
+        }
+        if(this.getPosition().zeile == start ){
+            p = new Position(this.getPosition().zeile+i, this.getPosition().spalte);
+
         }
         if(Position.isValid(this.getPosition().zeile+i, this.getPosition().spalte)){
             p = new Position(this.getPosition().zeile+i, this.getPosition().spalte);
-            ret.add(p);
+            if(m.getFigureAt(p.zeile,p.spalte) == null){
+                ret.add(p);
+                if(this.getPosition().zeile == start){
+                    p = new  Position(this.getPosition().zeile+2*i, this.getPosition().spalte);
+                    if(m.getFigureAt(p.zeile,p.spalte) == null){
+                        ret.add(p);
+                    }
+                }
+            }
+
         }
         for(int c = -1; c<2; c+=2){
             if(Position.isValid(this.getPosition().zeile+i, this.getPosition().spalte+c )){
