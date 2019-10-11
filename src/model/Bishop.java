@@ -24,16 +24,47 @@ public class Bishop extends Figure{
         List<Position> ret = new LinkedList<Position>();
         int maxedNum = Math.max(Position.getHeight(),Position.getWidth());
         Position p;
-        for(int i = -1*maxedNum; i< maxedNum; i++){
+        for(int i = 1; i< maxedNum; i++){
             if(Position.isValid(this.getPosition().zeile+i, this.getPosition().spalte+i)){
                 p = (new Position(this.getPosition().zeile +i, this.getPosition().spalte+i));
-                if(!ret.contains(p)) ret.add(p);
-            }
-            if(Position.isValid(this.getPosition().zeile-i, this.getPosition().spalte+i)){
-                p = (new Position(this.getPosition().zeile -i, this.getPosition().spalte+i));
+                if(!m.isFree(this.getColor(), p)){
+                    break;
+                }
                 if(!ret.contains(p)) ret.add(p);
             }
         }
+
+        for(int i = 1; i< maxedNum; i++){
+            if(Position.isValid(this.getPosition().zeile+i, this.getPosition().spalte-i)){
+                p = (new Position(this.getPosition().zeile +i, this.getPosition().spalte-i));
+                if(!m.isFree(this.getColor(), p)){
+                    break;
+                }
+                if(!ret.contains(p)) ret.add(p);
+            }
+        }
+
+        for(int i = 1; i< maxedNum; i++){
+            if(Position.isValid(this.getPosition().zeile-i, this.getPosition().spalte+i)){
+                p = (new Position(this.getPosition().zeile -i, this.getPosition().spalte+i));
+                if(!m.isFree(this.getColor(), p)){
+                    break;
+                }
+                if(!ret.contains(p)) ret.add(p);
+            }
+        }
+
+        for(int i = 1; i< maxedNum; i++){
+            if(Position.isValid(this.getPosition().zeile-i, this.getPosition().spalte-i)){
+                p = (new Position(this.getPosition().zeile -i, this.getPosition().spalte-i));
+                if(!m.isFree(this.getColor(), p)){
+                    break;
+                }
+                if(!ret.contains(p)) ret.add(p);
+
+            }
+        }
+
         return ret;
     }
 }
