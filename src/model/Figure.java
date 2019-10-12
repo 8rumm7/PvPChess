@@ -34,6 +34,18 @@ public abstract class Figure {
 
     public abstract List<Position> getPossiblePositions();
 
+    public boolean move(Position p){
+        if(!Position.isValid(p.zeile,p.spalte)) return false;
+        this.position = p;
+        return true;
+    }
+
+    public boolean move(int zeile, int spalte){
+        if(!Position.isValid(zeile, spalte)) return false;
+        this.position = new Position(zeile, spalte);
+        return true;
+    }
+
     public void setPosition(Position newP){
         this.position = newP;
     }

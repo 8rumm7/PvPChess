@@ -1,7 +1,7 @@
 package view;
 
 import model.Figure;
-import sun.plugin.dom.css.RGBColor;
+//import sun.plugin.dom.css.RGBColor;
 
 import javax.swing.*;
 import javax.swing.border.Border;

@@ -4,6 +4,7 @@ import model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
 
 public class View {
 
@@ -22,8 +23,8 @@ public class View {
     }
 
     private void initComponents() {
-        this.chessBoard = new ChessBoard(model.figureList);
-        this.figureBox = new FigureBox(model.whiteDeadList);
+        this.chessBoard = new ChessBoard((LinkedList<Figure>) model.getFigureList());
+        this.figureBox = new FigureBox((LinkedList<Figure>) model.getDeadFigure());
         name = JOptionPane.showInputDialog("Whats your opponents name?");
         if ( name.equals("")) {
             this.name = "John Doe";
