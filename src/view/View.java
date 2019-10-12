@@ -3,6 +3,7 @@ package view;
 import model.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.io.IOException;
 
@@ -26,6 +27,12 @@ public class View {
     private static final int FIGURE_BOX_WIDTH = 100;
     private static final int CHAT_HEIGHT = 400;
     private static final int CHAT_WIDTH = 300;
+    private static final Border BUTTON_RELEASED_BORDER =BorderFactory.createBevelBorder(0);
+    private static final Border BUTTON_PRESSED_BORDER =BorderFactory.createBevelBorder(1);
+    private static final Border FIGURE_BOX_BORDER =BorderFactory.createCompoundBorder(
+            BorderFactory.createBevelBorder(0),BorderFactory.createBevelBorder(1));
+    private static final Border CHAT_BORDER =BorderFactory.createBevelBorder(1);
+
     String name = "John Doe";
 
 
@@ -58,7 +65,7 @@ public class View {
         Container pane = frame.getContentPane();
         pane.setLayout(new GridBagLayout());
 
-        optionsButton = new JButton("Options");
+        optionsButton = new JButton("Options (button pressed)");
         optionsButton.setBackground(BUTTON_BACKGROUND_COLOR);
         optionsButton.setForeground(Color.WHITE);
         c.weightx = 0.1;
@@ -69,6 +76,7 @@ public class View {
         optionsButton.setMinimumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         optionsButton.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         optionsButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        optionsButton.setBorder(BUTTON_PRESSED_BORDER);
         pane.add(optionsButton, c);
 
         JLabel connectedToLabel = new JLabel("Connected to:");
@@ -103,6 +111,7 @@ public class View {
         chessBoard.setMinimumSize(new Dimension(FIELD_WIDTH,FIELD_HEIGHT));
         chessBoard.setMaximumSize(new Dimension(FIELD_WIDTH,FIELD_HEIGHT));
         chessBoard.setPreferredSize(new Dimension(FIELD_WIDTH,FIELD_HEIGHT));
+        chessBoard.setBorder(BorderFactory.createBevelBorder(0));
         pane.add(chessBoard, c);
 
 
@@ -114,6 +123,7 @@ public class View {
         figureBox.setMinimumSize(new Dimension(FIGURE_BOX_WIDTH,FIGURE_BOX_HEIGHT));
         figureBox.setMaximumSize(new Dimension(FIGURE_BOX_WIDTH,FIGURE_BOX_HEIGHT));
         figureBox.setPreferredSize(new Dimension(FIGURE_BOX_WIDTH,FIGURE_BOX_HEIGHT));
+        figureBox.setBorder(FIGURE_BOX_BORDER);
         pane.add(figureBox, c);
 
 
@@ -124,6 +134,7 @@ public class View {
         chat.setMinimumSize(new Dimension(CHAT_WIDTH,CHAT_HEIGHT));
         chat.setMaximumSize(new Dimension(CHAT_WIDTH,CHAT_HEIGHT));
         chat.setPreferredSize(new Dimension(CHAT_WIDTH,CHAT_HEIGHT));
+        chat.setBorder(CHAT_BORDER);
         pane.add(chat, c);
 
         JLabel time = new JLabel("Time");
@@ -139,7 +150,7 @@ public class View {
         time.setPreferredSize(new Dimension(LABEL_WIDTH,LABEL_HEIGHT));
         pane.add(time, c);
 
-        JButton giveUpButton = new JButton("Give Up");
+        JButton giveUpButton = new JButton("Give Up (button released)");
         giveUpButton.setBackground(BUTTON_BACKGROUND_COLOR);
         giveUpButton.setForeground(Color.WHITE);
 
@@ -150,6 +161,7 @@ public class View {
         giveUpButton.setMinimumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         giveUpButton.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         giveUpButton.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        giveUpButton.setBorder(BUTTON_RELEASED_BORDER);
         pane.add(giveUpButton, c);
 
         pane.setBackground(BACKGROUND_COLOR);
