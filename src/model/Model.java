@@ -3,7 +3,7 @@ package model;
 import java.util.LinkedList;
 
 public class Model {
-    public LinkedList<Figure> figureList;
+    public LinkedList<Figure> figureList=new LinkedList<>();
     public LinkedList<Figure> blackDeadList;
     public LinkedList<Figure> whiteDeadList;
     static Figure[][] board;
