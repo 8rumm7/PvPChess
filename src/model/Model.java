@@ -72,6 +72,8 @@ public class Model {
      * @return
      */
     public boolean put(Figure f){
+        System.out.println(f);
+        System.out.println(board[0][4]);
             try{
                 if(board[f.getPosition().zeile][f.getPosition().spalte]!= null){
                     int i = figureList.indexOf(f);

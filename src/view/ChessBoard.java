@@ -4,15 +4,15 @@ import model.Figure;
 import model.Position;
 import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
+import java.util.List;
 
 public class ChessBoard extends JPanel {
-    LinkedList<Figure> figureList;
+    List<Figure> figureList;
     private Color BACKGROUND_COLOR;
     private static final Color LIGHT = new Color(237, 194, 130);
     private static final Color DARK = new Color(140, 110, 65);
 
-    public ChessBoard(LinkedList<Figure> figureList, Color backgroundColor){
+    public ChessBoard(List<Figure> figureList, Color backgroundColor){
         this.figureList = figureList;
         this.BACKGROUND_COLOR = backgroundColor;
         init();
@@ -31,8 +31,8 @@ public class ChessBoard extends JPanel {
                     rect.setBackground(DARK);
                 }
                 for (Figure f : figureList) {
-                    if (f.position.equals(new Position(i, n))) {
-                        ImageIcon imageIcon = new ImageIcon("./images/" + f.kind + "_" + f.color + ".png");
+                    if (f.getPosition().equals(new Position(i, n))) {
+                        ImageIcon imageIcon = new ImageIcon("./images/" + f.getType() + "_" + f.getColor() + ".png");
                         Image image = imageIcon.getImage();
                         Image newImg = image.getScaledInstance(30, 40,  java.awt.Image.SCALE_SMOOTH);
                         imageIcon = new ImageIcon(newImg);

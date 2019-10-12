@@ -4,16 +4,16 @@ import model.Figure;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
+import java.util.List;
 
 public class FigureBox extends JPanel {
-    LinkedList<Figure> deadList;
+    List<Figure> deadList;
     private Color BACKGROUND_COLOR;
     private static final Color BOX_COLOR=new Color(132, 104, 78);
     JPanel panel;
 
 
-    public FigureBox(LinkedList<Figure> deadList, Color backgroundColor) {
+    public FigureBox(List<Figure> deadList, Color backgroundColor) {
         this.deadList = deadList;
         this.BACKGROUND_COLOR=backgroundColor;
         init();

@@ -37,13 +37,12 @@ public class View {
 
     public View(Model model) {
         this.model = model;
-        initComponents();
     }
 
 
-    private void initComponents() {
-        this.chessBoard = new ChessBoard(model.figureList, BACKGROUND_COLOR);
-        this.figureBox = new FigureBox(model.whiteDeadList, BACKGROUND_COLOR);
+    public void initComponents() {
+        this.chessBoard = new ChessBoard(model.getFigureList(), BACKGROUND_COLOR);
+        this.figureBox = new FigureBox(model.getDeadFigure(), BACKGROUND_COLOR);
         name = JOptionPane.showInputDialog("Whats your opponents name?");
         if (name.equals("")) {
             this.name = "John Doe";
