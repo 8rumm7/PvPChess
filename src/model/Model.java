@@ -1,285 +1,134 @@
 package model;
 
+import javafx.geometry.Pos;
+
 import java.util.LinkedList;
+import java.util.List;
+
+@SuppressWarnings("all")
 
 public class Model {
-    public LinkedList<Figure> figureList=new LinkedList<>();
-    public LinkedList<Figure> blackDeadList;
-    public LinkedList<Figure> whiteDeadList;
-    static Figure[][] board;
-    private static final String KING = "KING";
-    private static final String QUEEN = "QUEEN";
-    private static final String BISHOP = "BISHOP";
-    private static final String ROOK = "ROOK";
-    private static final String KNIGHT = "KNIGHT";
-    private static final String PAWN = "PAWN";
-    private static final String BLACK = "BLACK";
-    private static final String WHITE = "WHITE";
-
+    private LinkedList<Figure> figureList = new LinkedList<Figure>();
+    private static Figure[][] board;
+    private LinkedList<Figure> deadFigures = new LinkedList<Figure>();
 
     public void init() {
-        figureList = new LinkedList<>();
-        whiteDeadList = new LinkedList<>();
-        blackDeadList = new LinkedList<>();
         board = new Figure[8][8];
-        figureList.add(new Figure(KING, WHITE, new Position(0, 4)));
-        figureList.add(new Figure(KING, BLACK, new Position(7, 4)));
-        figureList.add(new Figure(QUEEN, WHITE, new Position(0, 3)));
-        figureList.add(new Figure(QUEEN, BLACK, new Position(7, 3)));
-        figureList.add(new Figure(ROOK, WHITE, new Position(0, 0)));
-        figureList.add(new Figure(ROOK, BLACK, new Position(7, 0)));
-        figureList.add(new Figure(ROOK, WHITE, new Position(0, 7)));
-        figureList.add(new Figure(ROOK, BLACK, new Position(7, 7)));
-        figureList.add(new Figure(BISHOP, WHITE, new Position(0, 2)));
-        figureList.add(new Figure(BISHOP, BLACK, new Position(7, 2)));
-        figureList.add(new Figure(BISHOP, WHITE, new Position(0, 5)));
-        figureList.add(new Figure(BISHOP, BLACK, new Position(7, 5)));
-        figureList.add(new Figure(KNIGHT, WHITE, new Position(0, 1)));
-        figureList.add(new Figure(KNIGHT, BLACK, new Position(7, 1)));
-        figureList.add(new Figure(KNIGHT, WHITE, new Position(0, 6)));
-        figureList.add(new Figure(KNIGHT, BLACK, new Position(7, 6)));
+        Position.setHeight(8);
+        Position.setWidth(8);
+        figureList.add(new King(this,PLAYERCOLOR.WHITE, new Position(0, 4)));
+        figureList.add(new King(this,PLAYERCOLOR.BLACK, new Position(7, 4)));
+        figureList.add(new Queen(this,PLAYERCOLOR.WHITE, new Position(0, 3)));
+        figureList.add(new Queen(this,PLAYERCOLOR.BLACK, new Position(7, 3)));
+        figureList.add(new Rook(this,PLAYERCOLOR.WHITE, new Position(0, 0)));
+        figureList.add(new Rook(this,PLAYERCOLOR.BLACK, new Position(7, 0)));
+        figureList.add(new Rook(this,PLAYERCOLOR.WHITE, new Position(0, 7)));
+        figureList.add(new Rook(this,PLAYERCOLOR.BLACK, new Position(7, 7)));
+        figureList.add(new Bishop(this,PLAYERCOLOR.WHITE, new Position(0, 2)));
+        figureList.add(new Bishop(this,PLAYERCOLOR.BLACK, new Position(7, 2)));
+        figureList.add(new Bishop(this,PLAYERCOLOR.WHITE, new Position(0, 5)));
+        figureList.add(new Bishop(this,PLAYERCOLOR.BLACK, new Position(7, 5)));
+        figureList.add(new Knight(this,PLAYERCOLOR.WHITE, new Position(0, 1)));
+        figureList.add(new Knight(this,PLAYERCOLOR.BLACK, new Position(7, 1)));
+        figureList.add(new Knight(this,PLAYERCOLOR.WHITE, new Position(0, 6)));
+        figureList.add(new Knight(this,PLAYERCOLOR.BLACK, new Position(7, 6)));
         for (int i = 0; i < 8; i++) {
-            figureList.add(new Figure(PAWN, WHITE, new Position(1, i)));
-            figureList.add(new Figure(PAWN, BLACK, new Position(6, i)));
+            figureList.add(new Pawn(this,PLAYERCOLOR.WHITE, new Position(1, i)));
+            figureList.add(new Pawn(this,PLAYERCOLOR.BLACK, new Position(6, i)));
         }
+
+
+        figureList.forEach(f -> put(f));
+
         for (Figure f : figureList) {
-            Position p = f.position;
-            board[p.zeile][p.spalte] = f;
-        }
-        for (Figure f : figureList) {
-            f.board = board;
-        }
-    }
+            System.out.println(f);
+            System.out.println("possible steps: ");
+            for(Position pos : f.getEligiblePositions()){
+                System.out.println(pos);
+            }
 
-    LinkedList<Position> possiblePositions(Figure figure) {
-        Position position = figure.position;
-        Position newPosition = figure.position;
-        LinkedList<Position> positions = new LinkedList<>();
-        if (figure.kind.equals(KING)) {
-            newPosition = new Position(position.spalte + 1, position.zeile + 1);
-            if (newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte + 1, position.zeile - 1);
-            if (newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte - 1, position.zeile + 1);
-            if (newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte - 1, position.zeile - 1);
-            if (newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte + 1, position.zeile);
-            if (newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte, position.zeile + 1);
-            if (newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte - 1, position.zeile);
-            if (newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte, position.zeile - 1);
-            if (newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
         }
-        if (figure.kind.equals(QUEEN)) {
-            for (int i = 1; i < 8; i++) {
-                newPosition = new Position(position.spalte + i, position.zeile + i);
-                if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                    positions.add(newPosition);
-                    if (board[newPosition.zeile][newPosition.spalte] != null) {
-                        break;
-                    }
-                }
-            }
-            for (int i = 1; i < 8; i++) {
-                newPosition = new Position(position.spalte + i, position.zeile - i);
-                if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                    positions.add(newPosition);
-                    if (board[newPosition.zeile][newPosition.spalte] != null) {
-                        break;
-                    }
-                }
-            }
-            for (int i = 1; i < 8; i++) {
-                newPosition = new Position(position.spalte - i, position.zeile + i);
-                if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                    positions.add(newPosition);
-                    if (board[newPosition.zeile][newPosition.spalte] != null) {
-                        break;
-                    }
-                }
-            }
-            for (int i = 1; i < 8; i++) {
-                newPosition = new Position(position.spalte - i, position.zeile - i);
-                if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                    positions.add(newPosition);
-                    if (board[newPosition.zeile][newPosition.spalte] != null) {
-                        break;
-                    }
-                }
-            }
-            for (int i = 1; i < 8; i++) {
-                newPosition = new Position(i, position.zeile);
-                if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                    positions.add(newPosition);
-                    if (board[newPosition.zeile][newPosition.spalte] != null) {
-                        break;
-                    }
-                }
-            }
-            for (int i = 1; i < 8; i++) {
-                newPosition = new Position(position.spalte, i);
-                if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                    positions.add(newPosition);
-                    if (board[newPosition.zeile][newPosition.spalte] != null) {
-                        break;
-                    }
-                }
-
-            }
-        }
-        if (figure.kind.equals(ROOK)) {
-            for (int i = 0; i < 8; i++) {
-                newPosition = new Position(position.spalte, i);
-                if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                    positions.add(newPosition);
-                    if (board[newPosition.zeile][newPosition.spalte] != null) {
-                        break;
-                    }
-
-                }
-            }
-            for (int i = 0; i < 8; i++) {
-                newPosition = new Position(i, position.zeile);
-                if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                    positions.add(newPosition);
-                    if (board[newPosition.zeile][newPosition.spalte] != null) {
-                        break;
-                    }
-                }
-            }
-        }
-        if (figure.kind.equals(BISHOP)) {
-            for (int i = 0; i < 8; i++) {
-                newPosition = new Position(position.spalte + i, position.zeile + i);
-                if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                    positions.add(newPosition);
-
-                    if (board[newPosition.zeile][newPosition.spalte] != null) {
-                        break;
-                    }
-                }
-            }
-            for (int i = 0; i < 8; i++) {
-
-                newPosition = new Position(position.spalte + i, position.zeile - i);
-                if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                    positions.add(newPosition);
-                    if (board[newPosition.zeile][newPosition.spalte] != null) {
-                        break;
-                    }
-                }
-            }
-            for (int i = 0; i < 8; i++) {
-                newPosition = new Position(position.spalte - i, position.zeile + i);
-                if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                    positions.add(newPosition);
-                    if (board[newPosition.zeile][newPosition.spalte] != null) {
-                        break;
-                    }
-                }
-            }
-            for (int i = 0; i < 8; i++) {
-                newPosition = new Position(position.spalte - i, position.zeile - i);
-                if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                    positions.add(newPosition);
-                    if (board[newPosition.zeile][newPosition.spalte] != null) {
-                        break;
-                    }
-                }
-            }
-        }
-        if (figure.kind.equals(KNIGHT)) {
-            newPosition = new Position(position.spalte + 1, position.zeile + 2);
-            if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte + 1, position.zeile - 2);
-            if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte - 1, position.zeile + 2);
-            if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte - 1, position.zeile - 2);
-            if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte + 2, position.zeile + 1);
-            if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte + 2, position.zeile - 1);
-            if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte - 2, position.zeile + 1);
-            if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-            newPosition = new Position(position.spalte - 2, position.zeile - 1);
-            if (!position.equals(newPosition) && newPosition.spalte >= 0 && newPosition.spalte <= 7 && newPosition.zeile >= 0 && newPosition.zeile <= 7) {
-                positions.add(newPosition);
-            }
-        }
-        if (figure.kind.equals(PAWN)) {
-            if (figure.color.equals(WHITE)) {
-                if (position.zeile == 1 && board[3][position.spalte] == null) {
-                    positions.add(new Position(position.zeile + 2, position.spalte));
-                }
-                if (board[position.zeile + 1][position.spalte] == null) {
-                    positions.add(new Position(position.zeile + 1, position.spalte));
-                }
-                if (board[position.zeile + 1][position.spalte - 1] != null) {
-                    positions.add(new Position(position.zeile + 1, position.spalte - 1));
-                }
-                if (board[position.zeile + 1][position.spalte + 1] != null) {
-                    positions.add(new Position(position.zeile + 1, position.spalte + 1));
-                }
-            } else {
-                if (position.zeile == 6 && board[4][position.spalte] == null) {
-                    positions.add(new Position(position.zeile - 2, position.spalte));
-                }
-                if (board[position.zeile - 1][position.spalte] == null) {
-                    positions.add(new Position(position.zeile - 1, position.spalte));
-                }
-                if (board[position.zeile - 1][position.spalte - 1] == null) {
-                    positions.add(new Position(position.zeile - 1, position.spalte - 1));
-                }
-                if (board[position.zeile - 1][position.spalte + 1] == null) {
-                    positions.add(new Position(position.zeile - 1, position.spalte + 1));
-                }
-            }
-        }
-        return positions;
 
     }
+    public boolean isFree(PLAYERCOLOR col, Position p){
+        return board[p.zeile][p.spalte] == null || board[p.zeile][p.spalte].getColor() != col;
+    }
+
+    public List<Figure> getFigureList(){
+        return this.figureList;
+    }
+
+    public List<Figure> getDeadFigure(){
+        return this.deadFigures;
+    }
+
+    public Figure getFigureAt(int zeile, int spalte){
+        return board[zeile][spalte];
+    }
+
+    /**
+     * the put method is used for putting a figure on the board on an empty field.
+     * @param f
+     * @return
+     */
+    public boolean put(Figure f){
+            try{
+                if(board[f.getPosition().zeile][f.getPosition().spalte]!= null){
+                    int i = figureList.indexOf(f);
+                    figureList.remove(i);
+                    throw new Exception("Tried putting a figure on a settled position");
+                }
+                board[f.getPosition().zeile][f.getPosition().spalte] = f;
+
+                return true;
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
+
+            return false;
+    }
+
+    public boolean strike(Figure f) throws Exception{
+        PLAYERCOLOR color = f.getColor();
+        if(board[f.getPosition().zeile][f.getPosition().spalte] == null || board[f.getPosition().zeile][f.getPosition().spalte].getColor() == color){
+            throw new Exception("tried striking to a field that is either empty or settled by a noharm figure");
+        }
+        deadFigures.add(board[f.getPosition().zeile][f.getPosition().spalte]);
+        figureList.remove(board[f.getPosition().zeile][f.getPosition().spalte]);
+        board[f.getPosition().zeile][f.getPosition().spalte] = f;
+        return true;
+    }
+
+    public Figure getFigureAt(Position p){
+        return board[p.zeile][p.spalte];
+    }
+
+    public boolean switchPawn(Figure f, String type){
+        if(f.getType().equals("Pawn")){
+            Figure newF = null;
+            switch(type){
+                case "Bishop": newF = new Bishop(this, f.getColor(), f.getPosition()); break;
+                case "Knight": newF = new Knight(this, f.getColor(), f.getPosition()); break;
+                case "Rook" : newF = new Rook(this, f.getColor(), f.getPosition()); break;
+                case "Queen": newF = new Queen(this, f.getColor(), f.getPosition()); break;
+            }
+            board[f.getPosition().zeile][f.getPosition().spalte] = newF;
+            figureList.remove(f);
+            figureList.add(newF);
+        }
+        return false;
+    }
+
+
+
+
 
     void removeFigure(Figure figure) {
         figureList.remove(figure);
-        if (figure.color.equals(WHITE)) {
-            whiteDeadList.add(figure);
-        } else {
-            blackDeadList.add(figure);
-        }
+        deadFigures.add(figure);
     }
+
+
 }
