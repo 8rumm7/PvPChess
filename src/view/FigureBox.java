@@ -29,6 +29,10 @@ public class FigureBox extends JPanel {
             figureField.setBackground(BOX_COLOR);
             this.add(figureField);
         }
+        this.setMinimumSize(new Dimension(100, 100));
+        this.setMaximumSize(new Dimension(100, 100));
+        this.setPreferredSize(new Dimension(100, 100));
         this.setVisible(true);
+
     }
 }

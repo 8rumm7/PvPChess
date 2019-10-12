@@ -26,11 +26,11 @@ public class ChessBoard extends JPanel {
         init();
     }
 
-    private void init() {
+    private void init1() {
         this.setLayout(new GridLayout(8, 8));
         this.setBackground(BACKGROUND_COLOR);
         JPanel rect;
-        for (int i = 7; i >=0; i--) {
+        for (int i = 7; i >= 0; i--) {
             for (int n = 0; n < 8; n++) {
                 rect = new JPanel();
                 if ((i + n) % 2 == 0) {
@@ -38,23 +38,63 @@ public class ChessBoard extends JPanel {
                 } else {
                     rect.setBackground(DARK);
                 }
-                System.out.println(figureList.size());
                 for (Figure f : figureList) {
                     if (f.position.equals(new Position(i, n))) {
                         BufferedImage image = null;
                         try {
-                            image = ImageIO.read(new File("./images/"+f.kind+"_"+f.color+".png"));
+                            image = ImageIO.read(new File("./images/" + f.kind + "_" + f.color + ".png"));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        rect.add(new JLabel(new ImageIcon(image)));
+                        ImageIcon icon = new ImageIcon(image);
+                        JLabel l = new JLabel(icon);
+                        rect.add(l);
                         break;
                     }
                 }
+                rect.setMinimumSize(new Dimension(10, 10));
+                rect.setMaximumSize(new Dimension(10, 10));
+                rect.setPreferredSize(new Dimension(10, 10));
+                this.add(rect);
+                this.setMinimumSize(new Dimension(100, 100));
+                this.setMaximumSize(new Dimension(100, 100));
+                this.setPreferredSize(new Dimension(100, 100));
+            }
+        }
+    }
+
+    private void init() {
+        this.setLayout(new GridLayout(8, 8));
+        this.setBackground(BACKGROUND_COLOR);
+        JPanel rect;
+        for (int i = 7; i >= 0; i--) {
+            for (int n = 0; n < 8; n++) {
+                rect = new JPanel();
+                if ((i + n) % 2 == 0) {
+                    rect.setBackground(LIGHT);
+                } else {
+                    rect.setBackground(DARK);
+                }
+                for (Figure f : figureList) {
+                    if (f.position.equals(new Position(i, n))) {
+                        ImageIcon imageIcon = new ImageIcon("./images/" + f.kind + "_" + f.color + ".png");
+                        Image image = imageIcon.getImage();
+                        Image newImg = image.getScaledInstance(30, 40,  java.awt.Image.SCALE_SMOOTH);
+                        imageIcon = new ImageIcon(newImg);
+                        JLabel l = new JLabel(imageIcon);
+                        rect.add(l);
+                        break;
+                    }
+                }
+                rect.setMinimumSize(new Dimension(10, 10));
+                rect.setMaximumSize(new Dimension(10, 10));
+                rect.setPreferredSize(new Dimension(10, 10));
                 this.add(rect);
             }
         }
-
     }
+
+
+
 
 }
