@@ -30,6 +30,10 @@ public class King extends Figure{
                     }
                 }
             }
+
+            
+
+
             return ret;
     }
 }

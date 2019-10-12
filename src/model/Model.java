@@ -107,12 +107,16 @@ public class Model {
 
     public boolean switchPawn(Figure f, String type){
         if(f.getType().equals("Pawn")){
-            Figure newF;
+            Figure newF = null;
             switch(type){
                 case "Bishop": newF = new Bishop(this, f.getColor(), f.getPosition()); break;
                 case "Knight": newF = new Knight(this, f.getColor(), f.getPosition()); break;
                 case "Rook" : newF = new Rook(this, f.getColor(), f.getPosition()); break;
+                case "Queen": newF = new Queen(this, f.getColor(), f.getPosition()); break;
             }
+            board[f.getPosition().zeile][f.getPosition().spalte] = newF;
+            figureList.remove(f);
+            figureList.add(newF);
         }
         return false;
     }
