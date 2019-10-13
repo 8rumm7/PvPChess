@@ -2,6 +2,8 @@ package model;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @SuppressWarnings("all")
 
 public class King extends Figure{
@@ -15,6 +17,27 @@ public class King extends Figure{
     public String getType() {
         return "King";
     }
+
+    @Override
+    public List<Position> getEligiblePositions(){
+        List<Position> ret = new LinkedList<Position>();
+        ret= getPossiblePositions().stream().distinct().filter(p -> m.isFree(this.getColor(), p) ).collect(Collectors.toList());
+        PLAYERCOLOR color = this.getColor();
+        List<Position> possiblePositionsForNextTurn = new LinkedList<Position>();
+        for(Figure f : m.getFigureList()){
+            if(f.getColor() != color){
+                possiblePositionsForNextTurn.addAll(f.getPossiblePositions());
+            }
+        }
+        System.out.println("LOS");
+        for(Position p : possiblePositionsForNextTurn){
+            System.out.println(p);
+        }
+        System.out.println("STOP");
+        ret.removeAll(possiblePositionsForNextTurn);
+        return ret;
+    }
+
 
     @Override
     public List<Position> getPossiblePositions() {

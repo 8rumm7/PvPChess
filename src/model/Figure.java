@@ -21,6 +21,10 @@ public abstract class Figure {
         return getPossiblePositions().stream().distinct().filter(p -> m.isFree(this.getColor(), p) ).collect(Collectors.toList());
     }
 
+    public List<Position> getAllowedPositions(){
+        return getEligiblePositions();
+    }
+
     public PLAYERCOLOR getColor(){
         return this.color;
     }
