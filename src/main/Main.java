@@ -8,10 +8,9 @@ public class Main {
     public static void main(String[] args) {
 
         Model model = new Model();
-       // model.init();
         View view = new View(model);
         Controller controller = new Controller(model, view);
-        Controller.init();
+        controller.init();
 
     }
 }

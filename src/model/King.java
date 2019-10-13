@@ -22,8 +22,8 @@ public class King extends Figure{
         Position p;
             for(int i = -1; i<2; i++){
                 for(int c = -1; c < 2; c++){
-                    if(Position.isValid(this.getPosition().zeile+i,this.getPosition().spalte+c)){
-                        p = new Position(this.getPosition().zeile+i,this.getPosition().spalte+c);
+                    if(Position.isValid(this.getPosition().row +i,this.getPosition().column +c)){
+                        p = new Position(this.getPosition().row +i,this.getPosition().column +c);
                         if(!ret.contains(p)){
                             ret.add(p);
                         }

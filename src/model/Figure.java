@@ -1,8 +1,6 @@
 package model;
 
 
-import javafx.geometry.Pos;
-
 import java.util.List;
 import java.util.stream.Collectors;
 @SuppressWarnings("all")
@@ -35,7 +33,7 @@ public abstract class Figure {
     public abstract List<Position> getPossiblePositions();
 
     public boolean move(Position p){
-        if(!Position.isValid(p.zeile,p.spalte)) return false;
+        if(!Position.isValid(p.row,p.column)) return false;
         this.position = p;
         return true;
     }
@@ -52,7 +50,7 @@ public abstract class Figure {
 
     @Override
     public String toString(){
-        return this.getColor()+" "+this.getType()+"@"+this.getPosition().zeile+"/"+this.getPosition().spalte;
+        return this.getColor()+" "+this.getType()+"@"+this.getPosition().row +"/"+this.getPosition().column;
     }
 
     public abstract String getType();

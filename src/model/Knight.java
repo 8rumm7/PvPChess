@@ -22,12 +22,12 @@ public class Knight extends Figure {
         Position p;
         for(int i = -2; i <5; i+=4){
             for(int c = -1; c < 2; c+=2){
-                if(Position.isValid(this.getPosition().zeile+i, this.getPosition().spalte+c)){
-                    p = new Position(this.getPosition().zeile+i, this.getPosition().spalte+c);
+                if(Position.isValid(this.getPosition().row +i, this.getPosition().column +c)){
+                    p = new Position(this.getPosition().row +i, this.getPosition().column +c);
                     ret.add(p);
                 }
-                if(Position.isValid(this.getPosition().zeile+c, this.getPosition().spalte+i)){
-                    p = new Position(this.getPosition().zeile+c, this.getPosition().spalte+i);
+                if(Position.isValid(this.getPosition().row +c, this.getPosition().column +i)){
+                    p = new Position(this.getPosition().row +c, this.getPosition().column +i);
                     ret.add(p);
                 }
             }

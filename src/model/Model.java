@@ -1,7 +1,5 @@
 package model;
 
-import javafx.geometry.Pos;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +7,7 @@ import java.util.List;
 
 public class Model {
     private LinkedList<Figure> figureList = new LinkedList<Figure>();
-    private static Figure[][] board;
+    public Figure[][] board;
     private LinkedList<Figure> deadFigures = new LinkedList<Figure>();
 
     public void init() {
@@ -36,6 +34,8 @@ public class Model {
             figureList.add(new Pawn(this,PLAYERCOLOR.WHITE, new Position(1, i)));
             figureList.add(new Pawn(this,PLAYERCOLOR.BLACK, new Position(6, i)));
         }
+        //Testing
+        figureList.add(new Queen(this,PLAYERCOLOR.WHITE, new Position(5, 5)));
 
 
         figureList.forEach(f -> put(f));
@@ -51,7 +51,7 @@ public class Model {
 
     }
     public boolean isFree(PLAYERCOLOR col, Position p){
-        return board[p.zeile][p.spalte] == null || board[p.zeile][p.spalte].getColor() != col;
+        return board[p.row][p.column] == null || board[p.row][p.column].getColor() != col;
     }
 
     public List<Figure> getFigureList(){
@@ -75,12 +75,12 @@ public class Model {
         System.out.println(f);
         System.out.println(board[0][4]);
             try{
-                if(board[f.getPosition().zeile][f.getPosition().spalte]!= null){
+                if(board[f.getPosition().row][f.getPosition().column]!= null){
                     int i = figureList.indexOf(f);
                     figureList.remove(i);
                     throw new Exception("Tried putting a figure on a settled position");
                 }
-                board[f.getPosition().zeile][f.getPosition().spalte] = f;
+                board[f.getPosition().row][f.getPosition().column] = f;
 
                 return true;
             }
@@ -94,17 +94,17 @@ public class Model {
 
     public boolean strike(Figure f) throws Exception{
         PLAYERCOLOR color = f.getColor();
-        if(board[f.getPosition().zeile][f.getPosition().spalte] == null || board[f.getPosition().zeile][f.getPosition().spalte].getColor() == color){
+        if(board[f.getPosition().row][f.getPosition().column] == null || board[f.getPosition().row][f.getPosition().column].getColor() == color){
             throw new Exception("tried striking to a field that is either empty or settled by a noharm figure");
         }
-        deadFigures.add(board[f.getPosition().zeile][f.getPosition().spalte]);
-        figureList.remove(board[f.getPosition().zeile][f.getPosition().spalte]);
-        board[f.getPosition().zeile][f.getPosition().spalte] = f;
+        deadFigures.add(board[f.getPosition().row][f.getPosition().column]);
+        figureList.remove(board[f.getPosition().row][f.getPosition().column]);
+        board[f.getPosition().row][f.getPosition().column] = f;
         return true;
     }
 
     public Figure getFigureAt(Position p){
-        return board[p.zeile][p.spalte];
+        return board[p.row][p.column];
     }
 
     public boolean switchPawn(Figure f, String type){
@@ -116,7 +116,7 @@ public class Model {
                 case "Rook" : newF = new Rook(this, f.getColor(), f.getPosition()); break;
                 case "Queen": newF = new Queen(this, f.getColor(), f.getPosition()); break;
             }
-            board[f.getPosition().zeile][f.getPosition().spalte] = newF;
+            board[f.getPosition().row][f.getPosition().column] = newF;
             figureList.remove(f);
             figureList.add(newF);
         }

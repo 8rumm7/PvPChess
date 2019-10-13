@@ -2,7 +2,7 @@ package model;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 @SuppressWarnings("all")
 
 public class Bishop extends Figure{
@@ -25,8 +25,8 @@ public class Bishop extends Figure{
         int maxedNum = Math.max(Position.getHeight(),Position.getWidth());
         Position p;
         for(int i = 1; i< maxedNum; i++){
-            if(Position.isValid(this.getPosition().zeile+i, this.getPosition().spalte+i)){
-                p = (new Position(this.getPosition().zeile +i, this.getPosition().spalte+i));
+            if(Position.isValid(this.getPosition().row +i, this.getPosition().column +i)){
+                p = (new Position(this.getPosition().row +i, this.getPosition().column +i));
                 if(!m.isFree(this.getColor(), p)){
                     break;
                 }
@@ -37,8 +37,8 @@ public class Bishop extends Figure{
         }
 
         for(int i = 1; i< maxedNum; i++){
-            if(Position.isValid(this.getPosition().zeile+i, this.getPosition().spalte-i)){
-                p = (new Position(this.getPosition().zeile +i, this.getPosition().spalte-i));
+            if(Position.isValid(this.getPosition().row +i, this.getPosition().column -i)){
+                p = (new Position(this.getPosition().row +i, this.getPosition().column -i));
                 if(!m.isFree(this.getColor(), p)){
                     break;
                 }
@@ -49,8 +49,8 @@ public class Bishop extends Figure{
         }
 
         for(int i = 1; i< maxedNum; i++){
-            if(Position.isValid(this.getPosition().zeile-i, this.getPosition().spalte+i)){
-                p = (new Position(this.getPosition().zeile -i, this.getPosition().spalte+i));
+            if(Position.isValid(this.getPosition().row -i, this.getPosition().column +i)){
+                p = (new Position(this.getPosition().row -i, this.getPosition().column +i));
                 if(!m.isFree(this.getColor(), p)){
                     break;
                 }
@@ -61,8 +61,8 @@ public class Bishop extends Figure{
         }
 
         for(int i = 1; i< maxedNum; i++){
-            if(Position.isValid(this.getPosition().zeile-i, this.getPosition().spalte-i)){
-                p = (new Position(this.getPosition().zeile -i, this.getPosition().spalte-i));
+            if(Position.isValid(this.getPosition().row -i, this.getPosition().column -i)){
+                p = (new Position(this.getPosition().row -i, this.getPosition().column -i));
                 if(!m.isFree(this.getColor(), p)){
                     break;
                 }

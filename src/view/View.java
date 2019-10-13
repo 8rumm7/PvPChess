@@ -5,12 +5,13 @@ import model.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.List;
 
 public class View {
 
     private static final double WINDOW_SCALE_CONSTANT = 1.2;
     Model model;
-    ChessBoard chessBoard;
+    public ChessBoard chessBoard;
     FigureBox figureBox;
     Chat chat;
     private static final Color BUTTON_BACKGROUND_COLOR = Color.GRAY;
@@ -41,7 +42,7 @@ public class View {
 
 
     public void initComponents() {
-        this.chessBoard = new ChessBoard(model.getFigureList(), BACKGROUND_COLOR);
+        this.chessBoard = new ChessBoard(model, BACKGROUND_COLOR);
         this.figureBox = new FigureBox(model.getDeadFigure(), BACKGROUND_COLOR);
         name = JOptionPane.showInputDialog("Whats your opponents name?");
         if (name.equals("")) {
@@ -174,4 +175,11 @@ public class View {
     }
 
 
+    public void printPossiblePositions(Figure figure) {
+        chessBoard.printPossiblePositions(figure);
+    }
+
+    public void update() {
+        chessBoard.update();
+    }
 }

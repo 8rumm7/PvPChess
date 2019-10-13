@@ -22,8 +22,8 @@ public class Rook extends Figure {
         Position p;
         int maxedNum = Math.max(Position.getHeight(),Position.getWidth());
         for(int i = 1; i <maxedNum; i++){
-            if(Position.isValid(this.getPosition().zeile, this.getPosition().spalte-i)){
-                p = new Position(this.getPosition().zeile, this.getPosition().spalte-i);
+            if(Position.isValid(this.getPosition().row, this.getPosition().column -i)){
+                p = new Position(this.getPosition().row, this.getPosition().column -i);
                 if(!m.isFree(this.getColor(), p)) break;
 
                 ret.add(p);
@@ -33,8 +33,8 @@ public class Rook extends Figure {
         }
 
         for(int i = 1; i <maxedNum; i++){
-            if(Position.isValid(this.getPosition().zeile, this.getPosition().spalte+i)){
-                p = new Position(this.getPosition().zeile, this.getPosition().spalte+i);
+            if(Position.isValid(this.getPosition().row, this.getPosition().column +i)){
+                p = new Position(this.getPosition().row, this.getPosition().column +i);
                 if(!m.isFree(this.getColor(), p)) break;
 
                 ret.add(p);
@@ -44,8 +44,8 @@ public class Rook extends Figure {
         }
 
         for(int i = 1; i <maxedNum; i++){
-            if(Position.isValid(this.getPosition().zeile+i, this.getPosition().spalte)){
-                p = new Position(this.getPosition().zeile+i, this.getPosition().spalte);
+            if(Position.isValid(this.getPosition().row +i, this.getPosition().column)){
+                p = new Position(this.getPosition().row +i, this.getPosition().column);
                 if(!m.isFree(this.getColor(), p)) break;
 
                 ret.add(p);
@@ -54,8 +54,8 @@ public class Rook extends Figure {
             }
         }
         for(int i = 1; i <maxedNum; i++){
-            if(Position.isValid(this.getPosition().zeile-i, this.getPosition().spalte)){
-                p = new Position(this.getPosition().zeile-i, this.getPosition().spalte);
+            if(Position.isValid(this.getPosition().row -i, this.getPosition().column)){
+                p = new Position(this.getPosition().row -i, this.getPosition().column);
                 if(!m.isFree(this.getColor(), p)) break;
 
                 ret.add(p);

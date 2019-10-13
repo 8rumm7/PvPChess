@@ -2,14 +2,14 @@ package model;
 @SuppressWarnings("all")
 
 public class Position {
-    int zeile;
-    int spalte;
+    public int row;
+    public int column;
     private static int BoardWidth = 8;
     private static int BoardHeight = 8;
 
-    public Position( int zeile,int spalte) {
-        this.zeile=zeile;
-        this.spalte=spalte;
+    public Position( int row,int column) {
+        this.row =row;
+        this.column =column;
 
     }
 
@@ -29,11 +29,11 @@ public class Position {
         Position.BoardHeight = i;
     }
 
-    public static boolean isValid(int zeile, int spalte){
-        if(zeile<0 || spalte < 0){
+    public static boolean isValid(int row, int column){
+        if(row<0 || column < 0){
             return false;
         }
-        if(zeile >= BoardHeight || spalte >= BoardWidth){
+        if(row >= BoardHeight || column >= BoardWidth){
             return false;
         }
         return true;
@@ -45,16 +45,16 @@ public class Position {
             return true;
         }
         Position p = (Position) o;
-        return this.spalte==p.spalte&&this.zeile==p.zeile;
+        return this.column ==p.column &&this.row ==p.row;
 
     }
 
     public Position cpyTo(int zeile, int spalte){
-        return new Position(this.zeile - zeile, this.spalte - spalte);
+        return new Position(this.row - zeile, this.column - spalte);
     }
 
     @Override
     public String toString() {
-        return this.zeile+" "+this.spalte;
+        return this.row +" "+this.column;
     }
 }

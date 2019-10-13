@@ -17,10 +17,10 @@ public class Pawn extends Figure {
     }
 
     private boolean eligiblePos(Position p){
-        if(m.getFigureAt(p.zeile,p.spalte) == null){
+        if(m.getFigureAt(p.row,p.column) == null){
             return false;
         }
-        if(m.getFigureAt(p.zeile,p.spalte).getColor() == this.getColor()){
+        if(m.getFigureAt(p.row,p.column).getColor() == this.getColor()){
             return false;
         }
         return true;
@@ -36,17 +36,17 @@ public class Pawn extends Figure {
             i=1;
             start = 1;
         }
-        if(this.getPosition().zeile == start ){
-            p = new Position(this.getPosition().zeile+i, this.getPosition().spalte);
+        if(this.getPosition().row == start ){
+            p = new Position(this.getPosition().row +i, this.getPosition().column);
 
         }
-        if(Position.isValid(this.getPosition().zeile+i, this.getPosition().spalte)){
-            p = new Position(this.getPosition().zeile+i, this.getPosition().spalte);
-            if(m.getFigureAt(p.zeile,p.spalte) == null){
+        if(Position.isValid(this.getPosition().row +i, this.getPosition().column)){
+            p = new Position(this.getPosition().row +i, this.getPosition().column);
+            if(m.getFigureAt(p.row,p.column) == null){
                 ret.add(p);
-                if(this.getPosition().zeile == start){
-                    p = new  Position(this.getPosition().zeile+2*i, this.getPosition().spalte);
-                    if(m.getFigureAt(p.zeile,p.spalte) == null){
+                if(this.getPosition().row == start){
+                    p = new  Position(this.getPosition().row +2*i, this.getPosition().column);
+                    if(m.getFigureAt(p.row,p.column) == null){
                         ret.add(p);
                     }
                 }
@@ -54,8 +54,8 @@ public class Pawn extends Figure {
 
         }
         for(int c = -1; c<2; c+=2){
-            if(Position.isValid(this.getPosition().zeile+i, this.getPosition().spalte+c )){
-                p = new Position(this.getPosition().zeile+i, this.getPosition().spalte+c);
+            if(Position.isValid(this.getPosition().row +i, this.getPosition().column +c )){
+                p = new Position(this.getPosition().row +i, this.getPosition().column +c);
                 if(eligiblePos(p)) ret.add(p);
             }
         }
