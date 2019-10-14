@@ -42,15 +42,17 @@ public class ChessBoard extends JPanel {
     private void init() {
         this.setLayout(new GridLayout(8, 8));
         this.setBackground(BACKGROUND_COLOR);
-        update();
+        printField();
 
     }
 
-    void update() {
+    void printField() {
         JButton btn;
+        figureList=model.getFigureList();
         for (int row = 7; row >= 0; row--) {
             for (int column = 0; column < 8; column++) {
                 btn = buttonBoard[row][column];
+                btn.setIcon(null);
                 btn.setBorder(null);
                 btn.setRolloverEnabled(false);
                 btn.setFocusPainted(false);
@@ -66,8 +68,7 @@ public class ChessBoard extends JPanel {
                         Image image = imageIcon.getImage();
                         Image newImg = image.getScaledInstance(30, 40, java.awt.Image.SCALE_SMOOTH);
                         imageIcon = new ImageIcon(newImg);
-                        JLabel l = new JLabel(imageIcon);
-                        btn.add(l);
+                        btn.setIcon(imageIcon);
                         break;
                     }
                 }
@@ -82,7 +83,7 @@ public class ChessBoard extends JPanel {
 
 
     public void printPossiblePositions(Figure figure) {
-        update();
+        printField();
         int row=figure.getPosition().row;
         int column = figure.getPosition().column;
         buttonBoard[row][column].setBackground(THIS_FIGURE);

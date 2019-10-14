@@ -6,9 +6,9 @@ import java.util.List;
 @SuppressWarnings("all")
 
 public class Model {
-    private LinkedList<Figure> figureList = new LinkedList<Figure>();
+    private List<Figure> figureList = new LinkedList<Figure>();
     public Figure[][] board;
-    private LinkedList<Figure> deadFigures = new LinkedList<Figure>();
+    private List<Figure> deadFigures = new LinkedList<Figure>();
 
     public void init() {
         board = new Figure[8][8];
@@ -124,7 +124,41 @@ public class Model {
         return false;
     }
 
+    public void moveFigure(Figure figure, Position position)  {
+        figureList.remove(figure);
+        board[figure.getPosition().row][figure.getPosition().column]=null;
+        figure.setPosition(position);
+        figureList.add(figure);
+        int row = figure.getPosition().row;
+        int column = figure.getPosition().column;
+        if (board[row][column] != null && board[row][column].getColor() != figure.getColor()) {
+            try {
+                strike(figure);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else{
+            board[figure.getPosition().row][figure.getPosition().column]=figure;
+        }
+    }
 
+    /**
+     * for testing purposes
+     */
+    public void printOccupiedPositions(){
+        for(int row = 7;row>=0;row--){
+            for(int column=0;column<8;column++){
+                if(board[row][column]!=null){
+                    System.out.print(1+"  ");
+                }else{
+                    System.out.print(0+"  ");
+                }
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
+        System.out.println(figureList.size());
+    }
 
 
 
