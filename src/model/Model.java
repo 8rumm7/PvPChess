@@ -30,8 +30,9 @@ public class Model {
         figureList.add(new Knight(this,PLAYERCOLOR.BLACK, new Position(7, 1)));
         figureList.add(new Knight(this,PLAYERCOLOR.WHITE, new Position(0, 6)));
         figureList.add(new Knight(this,PLAYERCOLOR.BLACK, new Position(7, 6)));
+        figureList.add(new Rook(this, PLAYERCOLOR.BLACK, new Position(5,4)));
         for (int i = 0; i < 8; i++) {
-            figureList.add(new Pawn(this,PLAYERCOLOR.WHITE, new Position(1, i)));
+            figureList.add(new Pawn(this,PLAYERCOLOR.BLACK, new Position(1, i)));
             figureList.add(new Pawn(this,PLAYERCOLOR.BLACK, new Position(6, i)));
         }
         //Testing
@@ -43,7 +44,7 @@ public class Model {
         for (Figure f : figureList) {
             System.out.println(f);
             System.out.println("possible steps: ");
-            for(Position pos : f.getEligiblePositions()){
+            for(Position pos : f.getPossiblePositions()){
                 System.out.println(pos);
             }
 

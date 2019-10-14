@@ -24,7 +24,7 @@ public class Rook extends Figure {
         for(int i = 1; i <maxedNum; i++){
             if(Position.isValid(this.getPosition().row, this.getPosition().column -i)){
                 p = new Position(this.getPosition().row, this.getPosition().column -i);
-                if(!m.isFree(this.getColor(), p)) break;
+                //if(!m.isFree(this.getColor(), p)) break;
 
                 ret.add(p);
                 if(m.getFigureAt(p) != null) break;
@@ -35,7 +35,7 @@ public class Rook extends Figure {
         for(int i = 1; i <maxedNum; i++){
             if(Position.isValid(this.getPosition().row, this.getPosition().column +i)){
                 p = new Position(this.getPosition().row, this.getPosition().column +i);
-                if(!m.isFree(this.getColor(), p)) break;
+                //if(!m.isFree(this.getColor(), p)) break;
 
                 ret.add(p);
                 if(m.getFigureAt(p) != null) break;
@@ -46,7 +46,7 @@ public class Rook extends Figure {
         for(int i = 1; i <maxedNum; i++){
             if(Position.isValid(this.getPosition().row +i, this.getPosition().column)){
                 p = new Position(this.getPosition().row +i, this.getPosition().column);
-                if(!m.isFree(this.getColor(), p)) break;
+                //if(!m.isFree(this.getColor(), p)) break;
 
                 ret.add(p);
                 if(m.getFigureAt(p) != null) break;
@@ -56,7 +56,7 @@ public class Rook extends Figure {
         for(int i = 1; i <maxedNum; i++){
             if(Position.isValid(this.getPosition().row -i, this.getPosition().column)){
                 p = new Position(this.getPosition().row -i, this.getPosition().column);
-                if(!m.isFree(this.getColor(), p)) break;
+                //if(!m.isFree(this.getColor(), p)) break;
 
                 ret.add(p);
                 if(m.getFigureAt(p) != null) break;
