@@ -5,7 +5,6 @@ import model.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.util.List;
 
 public class View {
 
@@ -180,6 +179,6 @@ public class View {
     }
 
     public void update() {
-        chessBoard.update();
+        chessBoard.printField();
     }
 }
