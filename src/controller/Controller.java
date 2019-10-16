@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Controller implements ActionListener {
+    final String HOSTNAME = "localhost";
+    final int PORT = 9999;
     static Model model;
     static View view;
     Figure activeFigure;
@@ -25,6 +27,7 @@ public class Controller implements ActionListener {
     public void init() {
         model.init();
         view.initComponents();
+        ServerClient s = new ServerClient(HOSTNAME, PORT);
         for (JButton[] row : view.chessBoard.buttonBoard) {
             for (JButton button : row) {
                 button.addActionListener(this);
